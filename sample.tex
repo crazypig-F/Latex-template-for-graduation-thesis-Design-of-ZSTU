@@ -1,0 +1,96 @@
+\documentclass[UTF8,hyperref]{pkuthss}
+
+% 产生 originauth.tex 里的 \Square。
+\usepackage{wasysym}
+% 提供 verbatiminput 命令和 comment 环境。
+\usepackage{verbatim}
+% 提供插入代码宏
+\usepackage{listings}
+
+% 设置页芯居中。
+\geometry{centering}
+% 设定行距。
+\renewcommand{\baselinestretch}{1.5}
+
+% 使引用标记成为上标。
+\newcommand{\supercite}[1]{\textsuperscript{\cite{#1}}}
+% 罗列环境中如果每个项目都只有一行左右，则会显得很松散，此时可采用这个命令。
+\newcommand{\denselist}{\setlength{\itemsep}{0pt}}
+
+\begin{document}
+	%% 设定生成的 pdf 的文档信息。
+	\hypersetup
+	{
+		pdfauthor={Chao. Fang},
+		pdftitle={垃圾分类自动判定(基于卷积神经网络实现)},
+		pdfsubject={浙江理工大学本科毕业设计（论文）},
+		pdfkeywords={人工智能，深度学习，卷积神经网络，垃圾分类}
+	}
+
+	%% 各种文档信息。
+	\renewcommand{\thesisname}{本科生毕业设计(论文)}
+	% 题目一般不宜超过 20 个字。
+	\title{垃圾分类自动判定(基于卷积神经网络实现)}
+	\etitle{Automatic judgment of garbage classification (based on convolutional neural network)}
+	\author{方超}
+	\eauthor{Chao. \ Fang}
+	\studentid{2017329621028}
+	\date{2021年01月}
+	\school{信息学院}
+	\major{计算机科学与技术}
+	\emajor{Computer science and technology}
+	\direction{图像识别}
+	\mentor{沈炜~教授}
+	\ementor{Prof.\ Shenwei}
+	% 关键词应有 3~5 个。
+	\keywords{人工智能，深度学习，卷积神经网络，垃圾分类}
+	\ekeywords{Artificial intelligence, Deep learning, Convolutional neural network, Garbage classification}
+
+	%% 以下为正文之前的部分，页码为小写罗马数字。
+	\frontmatter\pagenumbering{roman}
+
+	% 自动生成标题页。
+	\maketitle
+	% 中英文摘要。       
+	\include{chap/abstract}
+
+	% 使 \pdfbookmark 产生的书签链接到的位置正好在目录的开始。
+	\cleardoublepage
+	% 在生成的 pdf 中手动加入“目录”的书签，但不在目录中显示“目录”自己。
+	\pdfbookmark[1]{\contentsname}{thecontents}
+	% 自动生成目录。
+	\tableofcontents
+
+	%% 以下为正文，页码为小写罗马数字，但不显示页眉和页脚。
+	\mainmatter\pagenumbering{arabic}\pagestyle{fancy}
+
+	% 绪言。
+	\include{chap/introduction}
+	% 各章节。
+	\include{chap/chap2}
+	% 结论。
+	\include{chap/conclusion}
+	
+	\begin{appendix}
+		% 参考文献。
+		\nocite{*}
+		\bibliographystyle{chinesebst}\bibliography{sample}
+		% 此命令手动地在目录中增加相当于章级别的一行。
+		\addcontentsline{toc}{chapter}{\bibname}
+		% 此命令和真实的一级章命令结合，从而使 \addcontentsline
+		% 在目录中产生的页码正常。
+		\phantomsection
+
+		% 各附录。
+	\end{appendix}
+
+	%% 以下为正文之后的部分，页码为大写罗马数字。
+	\backmatter\pagenumbering{Roman}
+
+	% 致谢。
+	\include{chap/thanks}
+	% 原创性声明和使用授权说明，不显示页码。
+	\cleardoublepage\pagestyle{empty}
+	\include{chap/originauth}
+\end{document}
+
